@@ -33,7 +33,7 @@ const uploadOptions = multer({ storage: storage });
 
 //Get all products
 router.get('/', async (req, res) => {
-    const productList = await Product.find();
+    const productList = await Product.find().populate('category');
 
     if (!productList) {
         res.status(500).json({ success: false });
@@ -44,7 +44,9 @@ router.get('/', async (req, res) => {
 
 //Get product by id
 router.get('/:slug', async (req, res) => {
-    const product = await Product.findOne({ slug: req.params.slug });
+    const product = await Product.findOne({ slug: req.params.slug }).populate(
+        'category'
+    );
 
     if (!product) {
         return res
@@ -90,8 +92,7 @@ router.post('/', uploadOptions.single('image'), async (req, res) => {
             price: req.body.price,
             category: req.body.category,
             dateCreated: req.body.dateCreated,
-        });
-
+        }).populate('category');
         product = await product.save();
 
         if (!product)
@@ -123,7 +124,7 @@ router.patch('/:id', async (req, res) => {
 
         let product = await Product.findByIdAndUpdate(id, update, {
             new: true,
-        });
+        }).populate('category');
 
         if (!product)
             return res
