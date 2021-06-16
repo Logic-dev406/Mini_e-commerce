@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 require('./db/mongoose');
 
-const categoryRouter = require('./routers/category');
+const categoryRouter = require('./routers/categories');
 
 //middleware
 app.use(cors());
