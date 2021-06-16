@@ -174,4 +174,23 @@ router.put('/image/:id', uploadOptions.single('image'), async (req, res) => {
     }
 });
 
+//Delete product buy id
+router.delete('/:id', async (req, res) => {
+    Product.findByIdAndDelete(req.params.id)
+        .then((product) => {
+            if (product) {
+                return res
+                    .status(200)
+                    .send(response('The product was successfully deleted', {}));
+            } else {
+                return res
+                    .status(404)
+                    .send(response('Product not found', {}, false));
+            }
+        })
+        .catch((err) => {
+            return res.status(400).send(response(err.message, {}, false));
+        });
+});
+
 module.exports = router;
