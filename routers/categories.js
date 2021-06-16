@@ -49,7 +49,7 @@ router.post('/', async (req, res) => {
 });
 
 //Update category by id
-router.put('/:id', async (req, res) => {
+router.patch('/:id', async (req, res) => {
     const category = await Category.findByIdAndUpdate(
         req.params.id,
         {
