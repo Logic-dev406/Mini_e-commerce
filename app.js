@@ -6,6 +6,7 @@ const cors = require('cors');
 require('./db/mongoose');
 
 const categoryRouter = require('./routers/categories');
+const productRouter = require('./routers/products');
 
 //middleware
 app.use(cors());
@@ -13,6 +14,7 @@ app.options('*', cors());
 app.use(bodyParser.json());
 app.use(morgan('tiny'));
 app.use('/api/categories', categoryRouter);
+app.use('/api/products', productRouter);
 
 app.get('/', (req, res) => {
     res.send('Welcom to Mini e-commerce API');
