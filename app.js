@@ -14,8 +14,12 @@ app.use(bodyParser.json());
 app.use(morgan('tiny'));
 app.use('/api/categories', categoryRouter);
 
+app.get('/', (req, res) => {
+    res.send('Welcom to Mini e-commerce API');
+});
+
 //port
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 1000;
 
 app.listen(port, () => {
     console.log(`Server is up and running on localhost ${port}.`);

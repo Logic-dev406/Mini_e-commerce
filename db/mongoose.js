@@ -9,6 +9,7 @@ mongoose
         {
             useNewUrlParser: true,
             useUnifiedTopology: true,
+            useFindAndModify: false,
         }
     )
     .then(() => {
