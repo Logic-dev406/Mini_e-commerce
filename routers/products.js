@@ -92,7 +92,7 @@ router.post('/', uploadOptions.single('image'), async (req, res) => {
             price: req.body.price,
             category: req.body.category,
             dateCreated: req.body.dateCreated,
-        }).populate('category');
+        });
         product = await product.save();
 
         if (!product)
@@ -137,14 +137,13 @@ router.patch('/:id', async (req, res) => {
     }
 });
 
-//Update product image
-router.put('/image/:id', uploadOptions.single('image'), async (req, res) => {
+//Update product image buy id
+router.patch('/image/:id', uploadOptions.single('image'), async (req, res) => {
     try {
         if (!mongoose.isValidObjectId(req.params.id)) {
             res.status(400).send(response('Invalid Product id', {}, false));
         }
 
-        console.log(req.file);
         const file = req.file;
         if (!file) {
             return res
