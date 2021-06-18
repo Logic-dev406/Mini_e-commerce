@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 app.use(morgan('tiny'));
 app.use('/api/categories', categoryRouter);
 app.use('/api/products', productRouter);
+app.use('/public/uploads', express.static(__dirname + '/public/uploads'));
 
 app.get('/', (req, res) => {
     res.send('Welcom to Mini e-commerce API');
